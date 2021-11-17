@@ -1,0 +1,81 @@
+/** Global **/
+
+/* Preset Colors - Dark Theme! */
+:root {
+    --page-background: #303033;
+    --default-text-color: #D0D0D0;
+    --accent-text-color: #f56e0b;
+    --secondary-background: #505054;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--page-background);
+    color: var(--default-text-color);
+}
+
+/* Buttons and Links*/
+button,
+a {
+    color: lightskyblue;
+}
+
+button:hover,
+a:hover {
+    color: lavender;
+}
+
+button {
+    border: thin solid var(--secondary-background);
+    border-radius: 10px;
+    padding: 0 3px;
+}
+
+/** Header **/
+
+header {
+    position: relative;
+}
+
+.title {
+    color: var(--accent-text-color);
+}
+
+.menu {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+
+/** Panels **/
+
+.panel h2 {
+    border: solid 3px var(--accent-text-color);
+    border-radius: 10px;
+}
+
+.panel button {
+    margin: 3px;
+}
+
+/* Panel Children */
+.panel-child {
+    text-align: left;
+    border: thin dashed var(--secondary-background);
+    border-radius: 10px;
+    padding: 3px;
+    margin: 5px;
+}
+
+.panel-child * {
+    padding: 3px;
+}
+
+.panel-child h3 {
+    font-weight: bolder;
+    margin: 2px;
+    padding-left: 15px;
+    font-size: larger;
+    border-bottom: thin solid var(--default-text-color);
+}
