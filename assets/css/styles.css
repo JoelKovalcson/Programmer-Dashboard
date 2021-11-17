@@ -5,6 +5,7 @@
     --page-background: #303033;
     --default-text-color: #D0D0D0;
     --accent-text-color: #f56e0b;
+    --accent-border-color: #aa4d0b;
     --secondary-background: #505054;
 }
 
@@ -51,8 +52,9 @@ header {
 /** Panels **/
 
 .panel h2 {
-    border: solid 3px var(--accent-text-color);
+    border: solid 3px var(--accent-border-color);
     border-radius: 10px;
+    padding: 4px 0px;
 }
 
 .panel button {
