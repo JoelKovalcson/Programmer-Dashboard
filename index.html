@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/css/styles.css"/> 
+    <link rel="stylesheet" href="./assets/css/styles.css" />
     <title>Placeholder</title>
 </head>
+
 <body class="">
     <!-- Navigation/Header -->
     <header class="h-16 m-2">
@@ -22,6 +24,24 @@
         </ul>
     </header>
 
+    <button id="modalBtn" class="button">Click here to submit repository link!</button>
+
+    <div id="simpleModal" class="modal">
+        <div class="modalContent">
+            <div class="modalHeader">
+                <span id="closeBtn" class="closeBtn">&times;</span>
+            </div>
+            <div class="modalBody">
+                <form id="searchForm">
+                    <label for="searchRepo">Search for user's repository:</label>
+                    <input type="text" id="searchRepo" name="searchRepo">
+                    <label for="submitRepo">Provide a repository link:</label>
+                    <input type="text" id="submitRepo" name="submitRepo">
+                    <button type="submit" id="btnSubmit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
     <!-- Main Body -->
     <div class="flex flex-col md:flex-row justify-around m-3">
         <!-- Left Panel (Feed) -->
@@ -40,7 +60,9 @@
             -->
             <div class="panel-child">
                 <h3>Sample Title</h3>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae minus facere soluta, fugit, provident vero eos omnis quidem odit enim iste vitae accusamus suscipit voluptatibus dignissimos numquam illo pariatur magnam.</p>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae minus facere soluta, fugit, provident
+                    vero eos omnis quidem odit enim iste vitae accusamus suscipit voluptatibus dignissimos numquam illo
+                    pariatur magnam.</p>
                 <a href="https://google.com">Visit this repository</a>
             </div>
         </section>
@@ -64,7 +86,9 @@
                 -->
                 <div class="panel-child">
                     <h3>Repository Name</h3>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum iure praesentium culpa porro, officiis, itaque delectus, aut eveniet placeat quis sint nisi illo? Eaque doloribus est aut labore delectus ipsa.</p>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum iure praesentium culpa porro,
+                        officiis, itaque delectus, aut eveniet placeat quis sint nisi illo? Eaque doloribus est aut
+                        labore delectus ipsa.</p>
                     <a href="https://google.com">Visit this repository</a>
                 </div>
             </section>
@@ -85,7 +109,9 @@
                 -->
                 <div class="panel-child">
                     <h3>Repository Name</h3>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia rem ullam tempora, eligendi ex aliquam, obcaecati a dolorum minus dolore optio cum maxime quia sapiente autem! Libero eligendi ea exercitationem?</p>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia rem ullam tempora, eligendi ex
+                        aliquam, obcaecati a dolorum minus dolore optio cum maxime quia sapiente autem! Libero eligendi
+                        ea exercitationem?</p>
                     <a href="https://google.com">Visit this repository</a>
                 </div>
             </section>
@@ -93,7 +119,8 @@
 
     </div>
 
-    
+
     <script src="./assets/js/script.js" type="module"></script>
 </body>
+
 </html>
