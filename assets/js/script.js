@@ -2,7 +2,7 @@
 var modal = document.getElementById('simpleModal');
 
 //Get modal button
-var modalBtn = document.getElementById('modalBtn');
+var modalBtn = document.getElementById('addFollow');
 
 //Get close buttom
 var closeBtn = document.getElementById('closeBtn');
@@ -36,13 +36,14 @@ function outsideClick(e){
 }
 
 //Receive user input
-var submitBtn = document.getElementById('btnSubmit');
+var submitBtn = document.getElementById('searchForm');
 var repoSearch = document.getElementById('searchRepo');
 var repoLink = document.getElementById('submitRepo');
 
 function getUserInput(event) {
-    //event.preventDefault()
-console.log(repoSearch.value)
+    // console.log(repoSearch.value);
+    // console.log(repoLink.value);
+    event.preventDefault(); // Might need this?
 }
 
-submitBtn.addEventListener('submit', getUserInput())
+submitBtn.addEventListener('submit', getUserInput);
