@@ -1,3 +1,5 @@
+import{getTrending} from "./modules/populate.js"
+var trending = document.getElementById("following")
 //Get modal element
 var modal = document.getElementById('simpleModal');
 
@@ -47,3 +49,5 @@ function getUserInput(event) {
 }
 
 submitBtn.addEventListener('submit', getUserInput);
+
+getTrending(trending)
