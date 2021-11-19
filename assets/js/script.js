@@ -11,5 +11,5 @@ var following = document.getElementById("following");
 /* Popular */
 var trending = document.getElementById("popular");
 
-getTrending(trending);
+
 feed.setup(feedEl);
