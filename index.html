@@ -48,11 +48,12 @@
     <!-- Main Body -->
     <div class="flex flex-col md:flex-row justify-around m-3">
         <!-- Left Panel (Feed) -->
-        <section id="feed" class="flex-1 panel m-1">
+        <section class="flex-1 panel m-1">
             <h2 class="text-center text-3xl font-bold">
                 Feed
             </h2>
             <button id="refreshFeed" class="panel-button">Refresh</button>
+            <div id="feed"></div>
             <!-- Sample Child 
             <div class="feed-child">
                 <h3>Title</h3>
@@ -61,13 +62,6 @@
                 <a href="repo-link">Visit this repository</a>
             </div>
             -->
-            <div class="panel-child">
-                <h3>Sample Title</h3>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae minus facere soluta, fugit, provident
-                    vero eos omnis quidem odit enim iste vitae accusamus suscipit voluptatibus dignissimos numquam illo
-                    pariatur magnam.</p>
-                <a href="https://google.com">Visit this repository</a>
-            </div>
         </section>
 
         <!-- Right Panel (Following/Popular)-->
@@ -90,12 +84,13 @@
                 -->
             </section>
             <!-- Bottom Panel (Popular) -->
-            <section id="popular" class="panel m-1">
+            <section class="panel m-1">
                 <h2 class="text-center text-3xl font-bold">
                     Popular
                 </h2>
                 <button id="refreshPopular" class="panel-button">Refresh</button>
                 <button id="changePopular" class="panel-button">Change Filter</button>
+                <div id="popular"></div>
                 <!-- Sample Child 
                 <div class="popular-child">
                     <h3>Repository Name</h3>
