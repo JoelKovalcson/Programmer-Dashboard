@@ -33,12 +33,36 @@
                 <span id="closeBtn" class="closeBtn">&times;</span>
             </div>
             <div class="modalBody">
-                <form id="searchForm">
+                <form id="searchForm" class="searchForm">
                     <label for="searchRepo">Search for user's repository:</label>
                     <input type="text" id="searchRepo" name="searchRepo">
                     <label for="submitRepo">Provide a repository link:</label>
                     <input type="text" id="submitRepo" name="submitRepo">
                     <button type="submit" id="btnSubmit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="populateModal" class="modal">
+        <div class="modalContent">
+            <div class="modalHeader">
+                <span id="closeFilter" class="closeBtn">&times;</span>
+            </div>
+            <div class="modalBody">
+                <form id="changeFilter" class="searchForm">
+                    <span class="radio-wrapper">
+                        <input type="radio" name="period" id="daily" class="period">
+                        <label for="daily">Daily</label>
+                        <input type="radio" name="period" id="weekly" class="period">
+                        <label for="weekly">Weekly</label>
+                        <input type="radio" name="period" id="monthly" class="period">
+                        <label for="monthly">Monthly</label>
+                    </span>
+                    <br>
+                    <label for="language">Search by programming language:</label>
+                    <input type="text" id="language" name="searchLanguage">
+                    <button type="submit" id="searchFilter">Submit</button>
                 </form>
             </div>
         </div>
