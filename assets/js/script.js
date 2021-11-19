@@ -1,5 +1,5 @@
 import{getTrending} from "./modules/populate.js"
-var trending = document.getElementById("following")
+var trending = document.getElementById("popular")
 //Get modal element
 var modal = document.getElementById('simpleModal');
 
