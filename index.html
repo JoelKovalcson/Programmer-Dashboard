@@ -73,12 +73,13 @@
         <!-- Right Panel (Following/Popular)-->
         <div class="flex-1 flex flex-col">
             <!-- Top Panel (Following) -->
-            <section id="following" class="panel m-1">
+            <section class="panel m-1">
                 <h2 class="text-center text-3xl font-bold">
                     Following
                 </h2>
                 <button id="refreshFollowing" class="panel-button">Refresh</button>
                 <button id="addFollow" class="panel-button">Add</button>
+                <div id="following"></div>
                 <!-- Sample Child 
                 <div class="following-child">
                     <h3>Repository Name</h3>
@@ -87,22 +88,14 @@
                     <a href="repo-link">Visit this repository</a>
                 </div>
                 -->
-                <div class="panel-child">
-                    <h3>Repository Name</h3>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum iure praesentium culpa porro,
-                        officiis, itaque delectus, aut eveniet placeat quis sint nisi illo? Eaque doloribus est aut
-                        labore delectus ipsa.</p>
-                    <a href="https://google.com">Visit this repository</a>
-                </div>
             </section>
             <!-- Bottom Panel (Popular) -->
-            <section class="panel m-1">
+            <section id="popular" class="panel m-1">
                 <h2 class="text-center text-3xl font-bold">
                     Popular
                 </h2>
                 <button id="refreshPopular" class="panel-button">Refresh</button>
                 <button id="changePopular" class="panel-button">Change Filter</button>
-                <div id="popular"></div>
                 <!-- Sample Child 
                 <div class="popular-child">
                     <h3>Repository Name</h3>
