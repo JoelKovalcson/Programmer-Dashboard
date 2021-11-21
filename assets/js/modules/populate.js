@@ -5,8 +5,10 @@ const filterForm = document.getElementById('changeFilter');
 const closeFilter = document.getElementById('closeFilter');
 var trending = document.getElementById("popular");
 
-export function getTrending(popularEl,time = "monthly") {
-    let finalUrl = url + "?period=" + time 
+// Main function to get trending API
+export function getTrending(popularEl,time = "monthly",language = "") {
+    let finalUrl = url + "?period=" + time + "&language=" + language
+    console.log(finalUrl) 
     fetch(finalUrl)
         .then(response => response.json())
         .then(data => {
@@ -32,20 +34,24 @@ closeFilter.addEventListener("click", close)
 window.addEventListener('click', outsideClick)
 filterForm.addEventListener("submit", getUserInput)
 
+// Open change filter modal
 function openFilter() {
     populateModal.style.display = "block"
 }
 
+// Close modal when X is clicked
 function close() {
     populateModal.style.display = "none"
 }
 
+// Close modal when you click outside the modal
 function outsideClick(event){
     if(event.target == populateModal){
         close();
     }
 }
 
+// Get user input from modal and pass it through the API call
 function getUserInput(event) {
     let radioArray = document.querySelectorAll(".period")
     let time
@@ -54,7 +60,8 @@ function getUserInput(event) {
             time = radio.getAttribute("id")
         }
     })
-    getTrending(trending,time)
+    let language = document.getElementById("language").value
+    getTrending(trending,time,language)
     event.preventDefault()
     close()
 }
