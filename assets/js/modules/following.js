@@ -1,8 +1,8 @@
 // GitHub API Endpoint
 // Temporarily set to a fixed repository and username
-var owner = "JoelKovalcson";
-var repo =  "GitHub-At-A-Glance";
-const url = `https://api.github.com/repos/${owner}/${repo}`;
+// var owner = "JoelKovalcson";
+// var repo =  "GitHub-At-A-Glance";
+// const url = `https://api.github.com/repos/${owner}/${repo}`;
 
 /* Modals */
 var modal = document.getElementById('simpleModal');
@@ -29,16 +29,52 @@ function outsideClick(e){
     }
 }
 function getUserInput(event) {
-    // console.log(repoSearch.value);
-    // console.log(repoLink.value);
-    event.preventDefault(); // Might need this?
+    
+    // Might need this?
+    event.preventDefault();
+
+    if (repoSearch.value) {
+        /* NEED TO FIX THIS PART
+        let foundRepo_1 = repoSearch.value;
+        let foundOwner_1 = "";
+        getRepo(following, foundOwner_1, foundRepo_1); 
+
+        IS REPOSITORY NAME ENOUGH? 
+        WHAT IF DIFFERENT USER HAS A NAME SIMILAR TO
+        REPO THAT WAS SEARCHED?
+        ADD MODAL ASKING IF USER IS KNOWN?
+
+        */
+    }
+    else if (repoLink.value) {
+        // Take in user input and separate string into arrays by ".com/"
+        var link = repoLink.value;
+        var linkArray = link.split(".com/");
+        
+        // Tester code to console.log(linkArray);
+        // Split in array string by "/" revealing owner and repo name
+        var linkArrayFinal = linkArray[1].split("/");
+        
+        // Tester code to console.log(linkArrayFinal); 
+        let foundOwner = linkArrayFinal[0].trim();
+        let foundRepo = linkArrayFinal[1].trim();
+        getRepo(following, foundOwner, foundRepo);
+
+        // Clear data field
+        repoLink.value = "";
+    }
+    else {
+        alert("Invalid entry. Please Try Again")
+    }
+    
+     
     closeModal();
-    // getRepo(following, owner, repo);
+    
 }
 
 /* API Requests */
 function getRepo(followingEl, owner, repo) { 
-    // var url = `https://api.github.com/repos/${owner}/${repo}`
+    var url = `https://api.github.com/repos/${owner}/${repo}`
     fetch(url)
         .then(response => response.json())
         .then(data => {
