@@ -12,6 +12,8 @@ var closeBtn = document.getElementById('closeBtn');
 // Receive user input
 var repoSearch = document.getElementById('searchRepo');
 var repoLink = document.getElementById('submitRepo');
+// Remove following repo
+var unfollowBtn = document.querySelector('.exitButton');
 
 /* Event Handlers */
 // Function to open modal
@@ -72,6 +74,11 @@ function getUserInput(event) {
     
 }
 
+function unfollowRepo(event) {
+    // event.preventDefault()
+    // event.target.closest("div.panel-child").remove();
+}
+
 /* API Requests */
 function getRepo(followingEl, owner, repo) { 
     var url = `https://api.github.com/repos/${owner}/${repo}`
@@ -81,12 +88,15 @@ function getRepo(followingEl, owner, repo) {
             let div = document.createElement("div");
             let h3 = document.createElement("h3");
             let a = document.createElement("a");
+            let x = document.createElement("button")
             div.setAttribute("class", "panel-child");
             h3.textContent = data.name;
             a.textContent = "Visit this Repo";
             a.setAttribute("href", data.svn_url);
+            x.textContent = "Unfollow";
+            x.setAttribute("class", "exitButton");
             followingEl.appendChild(div);
-            div.append(h3, a);
+            div.append(h3, x, a);
         })
         .catch(ex => console.log("error"));
 }
@@ -100,3 +110,5 @@ closeBtn.addEventListener('click', closeModal);
 window.addEventListener('click', outsideClick);
 // Listen for submit click
 modalForm.addEventListener('submit', getUserInput);
+// Listen for unfollowClick
+unfollowBtn.addEventListener('click', unfollowRepo);
