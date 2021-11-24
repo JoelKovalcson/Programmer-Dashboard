@@ -110,5 +110,5 @@ closeBtn.addEventListener('click', closeModal);
 window.addEventListener('click', outsideClick);
 // Listen for submit click
 modalForm.addEventListener('submit', getUserInput);
-// Listen for unfollowClick
+// Listen for unfollowClick (added)
 unfollowBtn.addEventListener('click', unfollowRepo);
