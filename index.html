@@ -34,8 +34,12 @@
             </div>
             <div class="modalBody">
                 <form id="searchForm" class="searchForm">
-                    <label for="searchRepo">Search for user's repository:</label>
+                    <input type="radio" name="select" id="radName">
+                    <label for="searchUser">Provide a Username:</label>
+                    <input type="text" id="searchUser" name="searchUser">
+                    <label for="searchRepo">Provide a repository name:</label>
                     <input type="text" id="searchRepo" name="searchRepo">
+                    <input type="radio" name="select" id="repLink">
                     <label for="submitRepo">Provide a repository link:</label>
                     <input type="text" id="submitRepo" name="submitRepo">
                     <button type="submit" id="btnSubmit">Submit</button>
