@@ -1,8 +1,7 @@
-// GitHub API Endpoint
-// Temporarily set to a fixed repository and username
-// var owner = "JoelKovalcson";
-// var repo =  "GitHub-At-A-Glance";
-// const url = `https://api.github.com/repos/${owner}/${repo}`;
+// Reference to feed module
+var feed;
+// Set feed object to use in this file
+export function setFeed(f) {feed = f}
 
 /* Modals */
 var modal = document.getElementById('simpleModal');
@@ -81,7 +80,7 @@ function unfollowRepo(event) {
 
 /* API Requests */
 function getRepo(followingEl, owner, repo) { 
-    var url = `https://api.github.com/repos/${owner}/${repo}`
+    let url = `https://api.github.com/repos/${owner}/${repo}`
     fetch(url)
         .then(response => response.json())
         .then(data => {
@@ -142,4 +141,4 @@ window.addEventListener('click', outsideClick);
 // Listen for submit click
 modalForm.addEventListener('submit', getUserInput);
 // Listen for unfollowClick (added)
-unfollowBtn.addEventListener('click', unfollowRepo);
+// unfollowBtn.addEventListener('click', unfollowRepo);
