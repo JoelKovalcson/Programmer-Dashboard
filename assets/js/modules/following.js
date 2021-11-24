@@ -10,7 +10,7 @@ var modalBtn = document.getElementById('addFollow');
 var modalForm = document.getElementById('searchForm');
 var closeBtn = document.getElementById('closeBtn');
 // Receive user input
-var repoSearch = document.getElementById('searchRepo');
+var repoSearch = document.getElementById('searchUser');
 var repoLink = document.getElementById('submitRepo');
 // Remove following repo
 var unfollowBtn = document.querySelector('.exitButton');
