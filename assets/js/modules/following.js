@@ -87,15 +87,40 @@ function getRepo(followingEl, owner, repo) {
             let div = document.createElement("div");
             let h3 = document.createElement("h3");
             let a = document.createElement("a");
-            let x = document.createElement("button")
+            let feat_1 = document.createElement("div");
+            let feat_2 = document.createElement("div");
+            let feat_3 = document.createElement("div");
+            let feat_4 = document.createElement("div");
+            let feat_5 = document.createElement("div");
+            let feat_6 = document.createElement("div");
+            let feat_7 = document.createElement("div");
+            let x = document.createElement("button");
+
+            // Info to be dispalyed in following section per each repo
+            let updateTime = `${data}.updated_at.value`; 
+            let watchers = `${data}.watchers_count.value`; 
+            let programLang= `${data}.language.value`; 
+            let forks = `${data}.forks_count.value`; 
+            let issues = `${data}.open_issues_count.value`; 
+            let subs = `${data}.subscribers_count.value`; 
+            let bornDate = `${data}.created_at.value`;
+
+
             div.setAttribute("class", "panel-child");
             h3.textContent = data.name;
             a.textContent = "Visit this Repo";
             a.setAttribute("href", data.svn_url);
+            feat_1.textContent(`Time Updated: ${updateTime}`)
+            feat_2.textContent(`Number of Watchers: ${watchers}`)
+            feat_3.textContent(`Programming Language: ${programLang}`)
+            feat_4.textContent(`Number of Forks: ${forks}`)
+            feat_5.textContent(`Number of Issues: ${issues}`)
+            feat_6.textContent(`Subscriber Count: ${subs}`)
+            feat_7.textContent(`Date Created: ${bornDate}`)          
             x.textContent = "Unfollow";
             x.setAttribute("class", "exitButton");
             followingEl.appendChild(div);
-            div.append(h3, x, a);
+            div.append(h3, feat_1, feat_2, feat_3, feat_4, feat_5, feat_6, feat_7,.value x, a);
 
 
             
