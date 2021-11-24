@@ -1,4 +1,4 @@
-const url = `https://api.trending-github.com/github/repositories`
+const url = `https://gh-trending-api.herokuapp.com/repositories`
 const changeFilter = document.getElementById("changePopular")
 const populateModal = document.getElementById('populateModal');
 const filterForm = document.getElementById('changeFilter');
@@ -7,7 +7,7 @@ var trending = document.getElementById("popular");
 
 // Main function to get trending API
 export function getTrending(popularEl,time = "monthly",language = "") {
-    let finalUrl = url + "?period=" + time + "&language=" + language
+    let finalUrl = url + language + "?since=" + time
     console.log(finalUrl) 
     fetch(finalUrl)
         .then(response => response.json())
@@ -18,7 +18,7 @@ export function getTrending(popularEl,time = "monthly",language = "") {
                 let h3 = document.createElement("h3")
                 let a = document.createElement("a")
                 div.setAttribute("class", "panel-child")
-                h3.textContent = element.name
+                h3.textContent = element.repositoryName
                 a.textContent = "Visit this Repo"
                 a.setAttribute("href", element.url)
                 popularEl.appendChild(div)
@@ -60,7 +60,7 @@ function getUserInput(event) {
             time = radio.getAttribute("id")
         }
     })
-    let language = document.getElementById("language").value
+    let language = "/" + document.getElementById("language").value
     getTrending(trending,time,language)
     event.preventDefault()
     close()
