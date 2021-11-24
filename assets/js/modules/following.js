@@ -12,8 +12,7 @@ var closeBtn = document.getElementById('closeBtn');
 // Receive user input
 var repoSearch = document.getElementById('searchRepo');
 var repoLink = document.getElementById('submitRepo');
-// Remove following repo
-var unfollowBtn = document.querySelector('.exitButton');
+
 
 /* Event Handlers */
 // Function to open modal
@@ -97,6 +96,12 @@ function getRepo(followingEl, owner, repo) {
             x.setAttribute("class", "exitButton");
             followingEl.appendChild(div);
             div.append(h3, x, a);
+
+
+            
+            
+            // Remove following repo
+            var unfollowBtn = document.querySelector('.exitButton');
         })
         .catch(ex => console.log("error"));
 }
