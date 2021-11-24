@@ -17,8 +17,9 @@ export function getFollowing() {
 
 export function updateAllRepos() {
     if(storage === null) return;
+    if(storage.length == 0) return;
     storage.forEach(repo => {
-
+        // TODO
     });
 }
 
