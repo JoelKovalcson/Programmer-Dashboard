@@ -51,16 +51,19 @@
             </div>
             <div class="modalBody">
                 <form id="changeFilter" class="searchForm">
-                    <span class="radio-wrapper">
+                    <span class="radio-wrapper text-center">
+                        <h3 class="text-xl">Select search period</h3>
                         <input type="radio" name="period" id="daily" class="period">
                         <label for="daily">Daily</label>
+                        <br>
                         <input type="radio" name="period" id="weekly" class="period">
                         <label for="weekly">Weekly</label>
+                        <br>
                         <input type="radio" name="period" id="monthly" class="period">
                         <label for="monthly">Monthly</label>
                     </span>
                     <br>
-                    <label for="language">Search by programming language:</label>
+                    <label for="language" class="text-xl">Search by programming language:</label>
                     <input type="text" id="language" name="searchLanguage">
                     <button type="submit" id="searchFilter">Submit</button>
                 </form>
