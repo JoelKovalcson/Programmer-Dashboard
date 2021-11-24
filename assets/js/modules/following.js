@@ -1,8 +1,8 @@
 // GitHub API Endpoint
 // Temporarily set to a fixed repository and username
-var owner = "JoelKovalcson";
-var repo =  "GitHub-At-A-Glance";
-const url = `https://api.github.com/repos/${owner}/${repo}`;
+// var owner = "JoelKovalcson";
+// var repo =  "GitHub-At-A-Glance";
+// const url = `https://api.github.com/repos/${owner}/${repo}`;
 
 /* Modals */
 var modal = document.getElementById('simpleModal');
@@ -12,6 +12,8 @@ var closeBtn = document.getElementById('closeBtn');
 // Receive user input
 var repoSearch = document.getElementById('searchRepo');
 var repoLink = document.getElementById('submitRepo');
+// Remove following repo
+var unfollowBtn = document.querySelector('.exitButton');
 
 /* Event Handlers */
 // Function to open modal
@@ -29,28 +31,72 @@ function outsideClick(e){
     }
 }
 function getUserInput(event) {
-    // console.log(repoSearch.value);
-    // console.log(repoLink.value);
-    event.preventDefault(); // Might need this?
+    
+    // Might need this?
+    event.preventDefault();
+
+    if (repoSearch.value) {
+        /* NEED TO FIX THIS PART
+        let foundRepo_1 = repoSearch.value;
+        let foundOwner_1 = "";
+        getRepo(following, foundOwner_1, foundRepo_1); 
+
+        IS REPOSITORY NAME ENOUGH? 
+        WHAT IF DIFFERENT USER HAS A NAME SIMILAR TO
+        REPO THAT WAS SEARCHED?
+        ADD MODAL ASKING IF USER IS KNOWN?
+
+        */
+    }
+    else if (repoLink.value) {
+        // Take in user input and separate string into arrays by ".com/"
+        var link = repoLink.value;
+        var linkArray = link.split(".com/");
+        
+        // Tester code to console.log(linkArray);
+        // Split in array string by "/" revealing owner and repo name
+        var linkArrayFinal = linkArray[1].split("/");
+        
+        // Tester code to console.log(linkArrayFinal); 
+        let foundOwner = linkArrayFinal[0].trim();
+        let foundRepo = linkArrayFinal[1].trim();
+        getRepo(following, foundOwner, foundRepo);
+
+        // Clear data field
+        repoLink.value = "";
+    }
+    else {
+        alert("Invalid entry. Please Try Again")
+    }
+    
+     
     closeModal();
-    // getRepo(following, owner, repo);
+    
+}
+
+function unfollowRepo(event) {
+    // event.preventDefault()
+    // event.target.closest("div.panel-child").remove();
 }
 
 /* API Requests */
 function getRepo(followingEl, owner, repo) { 
-    // var url = `https://api.github.com/repos/${owner}/${repo}`
+    var url = `https://api.github.com/repos/${owner}/${repo}`
     fetch(url)
         .then(response => response.json())
         .then(data => {
             let div = document.createElement("div");
             let h3 = document.createElement("h3");
             let a = document.createElement("a");
+            let x = document.createElement("button")
             div.setAttribute("class", "panel-child");
             h3.textContent = data.name;
             a.textContent = "Visit this Repo";
             a.setAttribute("href", data.svn_url);
+            x.textContent = "Unfollow";
+            x.setAttribute("class", "exitButton");
             followingEl.appendChild(div);
-            div.append(h3, a);
+            div.append(h3, x, a);
         })
         .catch(ex => console.log("error"));
 }
@@ -64,3 +110,5 @@ closeBtn.addEventListener('click', closeModal);
 window.addEventListener('click', outsideClick);
 // Listen for submit click
 modalForm.addEventListener('submit', getUserInput);
+// Listen for unfollowClick
+unfollowBtn.addEventListener('click', unfollowRepo);

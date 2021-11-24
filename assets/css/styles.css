@@ -37,6 +37,10 @@ button {
     color: #D0D0D0;
 }
 
+.exitButton {
+    /* Adding styling as needed */
+}
+
 .button:hover {
     background-color: #aa4d0b;
 }
