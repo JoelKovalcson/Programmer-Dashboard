@@ -1,33 +1,47 @@
 const storageString = "gh-at-a-glance/feed";
 
-export let feed = {
-    mainElement: null,
-    storage: null,
-    setup: function(el = null) {
-        this.mainElement = el;
-        this.storage = JSON.parse(localStorage.getItem(storageString));
-        this.updateFeed();
-    },
-    saveStorage: function() {
-        localStorage.setItem(storageString, JSON.stringify(this.storage.current));
-    },
-    addFeed: function(item) {
-        this.storage.push(item);
-        this.updateFeed();
-    },
-    removeFeed: function(item) {
-        // TODO 
-    },
-    updateFeed: function() {
-        // Clear Feed
-        this.mainElement.innerHTML = "";
-        // Generate section for each item if there's something different
-        if(this.storage == null) return;
-        this.storage.forEach(item => {
-            // Generate Div structure and append
-            let itemDiv = document.createElement("div");
-            
-            this.mainElement.append(itemDiv);
-        });
+
+var mainElement = null;
+var storage = null;
+var following = null;
+
+export function setup(el = null, following = null) {
+    mainElement = el;
+    following = following;
+    storage = JSON.parse(localStorage.getItem(storageString));
+    updateFeed();
+}
+
+export function saveStorage() {
+    localStorage.setItem(storageString, JSON.stringify(this.storage.current));
+}
+
+export function updateFeed() {
+    let prev_repos;
+    try {
+        prev_repos = JSON.parse(JSON.stringify(following.getFollowing()));
+    } catch {
+        prev_repos = null;
     }
+    following.updateAllRepos();
+    let cur_repos;
+    try {
+        cur_repos = JSON.parse(JSON.stringify(following.getFollowing()));
+    } catch {
+        cur_repos = null;
+    }
+
+    // Might need to clear feed at some point or setup pages?
+    // this.mainElement.innerHTML = "";
+
+    if (storage === null) return;
+    if (storage.length == 0) return;
+    // For now, each item is a repo, so make a new section for each repo's changes
+    storage.forEach(item => {
+        // Generate Div structure and append
+        let itemDiv = document.createElement("div");
+        // TODO
+
+        // mainElement.append(itemDiv);
+    });
 }

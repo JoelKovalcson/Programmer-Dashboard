@@ -3,6 +3,25 @@ var feed;
 // Set feed object to use in this file
 export function setFeed(f) {feed = f}
 
+// Reference to following DOM element
+var followingEl;
+// Set the DOM element for following
+export function setFollowing(el) {followingEl = el}
+
+// Storage variable for followed repos
+var storage = null;
+
+export function getFollowing() {
+    return storage;
+}
+
+export function updateAllRepos() {
+    if(storage === null) return;
+    storage.forEach(repo => {
+
+    });
+}
+
 /* Modals */
 var modal = document.getElementById('simpleModal');
 var modalBtn = document.getElementById('addFollow');

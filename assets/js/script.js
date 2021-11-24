@@ -12,6 +12,7 @@ var followingEl = document.getElementById("following");
 /* Popular */
 var newsEl = document.getElementById("popular");
 
-feed.setup(feedEl);
+feed.setup(feedEl, following);
+
 following.setFeed(feed);
 news.getNews(newsEl)
