@@ -120,7 +120,7 @@ function getRepo(followingEl, owner, repo) {
             x.textContent = "Unfollow";
             x.setAttribute("class", "exitButton");
             followingEl.appendChild(div);
-            div.append(h3, feat_1, feat_2, feat_3, feat_4, feat_5, feat_6, feat_7,.value x, a);
+            div.append(h3, feat_1, feat_2, feat_3, feat_4, feat_5, feat_6, feat_7, x, a);
 
 
             
