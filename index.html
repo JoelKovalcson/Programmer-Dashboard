@@ -48,27 +48,42 @@
         </div>
     </div>
 
-    <div id="populateModal" class="modal">
+    <div id="newsModal" class="modal">
         <div class="modalContent">
             <div class="modalHeader">
-                <span id="closeFilter" class="closeBtn">&times;</span>
+                <span id="closeNewsModal" class="closeBtn">&times;</span>
             </div>
             <div class="modalBody">
-                <form id="changeFilter" class="searchForm">
+                <form id="storyType" class="searchForm">
                     <span class="radio-wrapper text-center">
-                        <h3 class="text-xl">Select search period</h3>
-                        <input type="radio" name="period" id="daily" class="period">
-                        <label for="daily">Daily</label>
+                        <h3 class="text-xl">Select your stories</h3>
+                        <input type="radio" name="story" id="topstories" class="story">
+                        <label for="topstories">Top Stories</label>
                         <br>
-                        <input type="radio" name="period" id="weekly" class="period">
-                        <label for="weekly">Weekly</label>
+                        <input type="radio" name="story" id="newstories" class="story">
+                        <label for="newstories">New Stories</label>
                         <br>
-                        <input type="radio" name="period" id="monthly" class="period">
-                        <label for="monthly">Monthly</label>
+                        <input type="radio" name="story" id="beststories" class="story">
+                        <label for="beststories">Best Stories</label>
+                        <br>
+                        <input type="radio" name="story" id="askstories" class="story">
+                        <label for="askstories">Ask Stories</label>
+                        <br>
+                        <input type="radio" name="story" id="showstories" class="story">
+                        <label for="showstories">Show Stories</label>
+                        <br>
+                        <input type="radio" name="story" id="jobstories" class="story">
+                        <label for="jobstories">Job Stories</label>
                     </span>
-                    <br>
-                    <label for="language" class="text-xl">Search by programming language:</label>
-                    <input type="text" id="language" name="searchLanguage">
+                        <br>
+                        <label for="numberArticles">Number of articles displayed</label>
+                        <select name="numberArticles" id="numberArticles">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                            <option value="25">25</option>
+                        </select>
                     <button type="submit" id="searchFilter">Submit</button>
                 </form>
             </div>
@@ -117,11 +132,11 @@
             <!-- Bottom Panel (Popular) -->
             <section class="panel m-1">
                 <h2 class="text-center text-3xl font-bold">
-                    Popular
+                    News
                 </h2>
-                <button id="refreshPopular" class="panel-button">Refresh</button>
-                <button id="changePopular" class="panel-button">Change Filter</button>
-                <div id="popular"></div>
+                <!-- <button id="refreshPopular" class="panel-button">Refresh</button> -->
+                <button id="changeNews" class="panel-button">Story Type</button>
+                <div id="news"></div>
                 <!-- Sample Child 
                 <div class="popular-child">
                     <h3>Repository Name</h3>
