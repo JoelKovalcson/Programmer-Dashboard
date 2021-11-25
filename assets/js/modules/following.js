@@ -80,11 +80,16 @@ function updateDisplay(updateFeed, repo = null) {
 }
 
 function updateRepoData() {
-    storage.forEach(repo => {
-        let newRepo = getRepo(repo.owner, repo.name);
-        // For every property in the repo, set it to the new value
+    storage.forEach(async repo => {
+        let newRepo = await getRepo(repo.owner, repo.name);
+        console.log(repo);
+        // For every property in the repo, set it to the new value    
         for (let key in newRepo) repo[key] = newRepo[key];
+        console.log(newRepo);
+        console.log(repo);
+        
     });
+    console.log(storage);
 }
 
 function updateFeedData() {
