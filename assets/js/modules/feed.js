@@ -5,9 +5,9 @@ var mainElement = null;
 var storage = null;
 var following = null;
 
-export function setup(el = null, following = null) {
+export function setup(el = null, f = null) {
     mainElement = el;
-    following = following;
+    following = f;
     storage = JSON.parse(localStorage.getItem(storageString));
     updateFeed();
 }
