@@ -29,7 +29,8 @@ var modalBtn = document.getElementById('addFollow');
 var modalForm = document.getElementById('searchForm');
 var closeBtn = document.getElementById('closeBtn');
 // Receive user input
-var repoSearch = document.getElementById('searchUser');
+var userSearch = document.getElementById('searchUser');
+var repoSearch = document.getElementById("searchRepo");
 var repoLink = document.getElementById('submitRepo');
 
 
@@ -52,21 +53,27 @@ function getUserInput(event) {
     
     // Might need this?
     event.preventDefault();
+    
+    let r = document.getElementById("radName");
+    let m = document.getElementById("repLink");
+    
+    
+    if(r.checked) {
+        console.log(userSearch.value, repoSearch.value);
 
-    if (repoSearch.value) {
-        /* NEED TO FIX THIS PART
-        let foundRepo_1 = repoSearch.value;
-        let foundOwner_1 = "";
-        getRepo(following, foundOwner_1, foundRepo_1); 
+        // Take in user input 
+        let userName = userSearch.value.trim();
+        let repoName = repoSearch.value; // No trim needed because Repo could have spaces in name
+        
+        console.log(userName, repoName);
 
-        IS REPOSITORY NAME ENOUGH? 
-        WHAT IF DIFFERENT USER HAS A NAME SIMILAR TO
-        REPO THAT WAS SEARCHED?
-        ADD MODAL ASKING IF USER IS KNOWN?
-
-        */
+            getRepo(following, userName, repoName);
+            userSearch.value = "";
+            repoSearch.value = "";
+        
     }
-    else if (repoLink.value) {
+    
+    else if (m.checked) {
         // Take in user input and separate string into arrays by ".com/"
         var link = repoLink.value;
         var linkArray = link.split(".com/");
@@ -85,7 +92,7 @@ function getUserInput(event) {
         repoLink.value = "";
     }
     else {
-        alert("Invalid entry. Please Try Again")
+        alert("Please Select an Option Below.")
     }
     
      
