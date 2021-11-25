@@ -10,7 +10,7 @@ var feedEl = document.getElementById("feed");
 var followingEl = document.getElementById("following");
 
 /* Popular */
-var newsEl = document.getElementById("popular");
+var newsEl = document.getElementById("news");
 
 feed.setup(feedEl, following);
 
