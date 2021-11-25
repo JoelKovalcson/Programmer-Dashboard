@@ -3,6 +3,7 @@ const storyBtn = document.getElementById("changeNews")
 const newsModal = document.getElementById('newsModal');
 const storyType = document.getElementById('storyType');
 const closeNewsModal = document.getElementById('closeNewsModal');
+const numberArticles = document.getElementById('numberArticles');
 var news = document.getElementById("news");
 
 
