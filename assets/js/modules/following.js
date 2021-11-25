@@ -1,164 +1,233 @@
-// Reference to feed module
-var feed;
-// Set feed object to use in this file
-export function setFeed(f) {feed = f}
+// Reference to DOM elements
+var followingEl = document.getElementById("following");
+var feedEl = document.getElementById("feed");
 
-// Reference to following DOM element
-var followingEl;
-// Set the DOM element for following
-export function setFollowing(el) {followingEl = el}
-
+// localStorage key for page information
+const storageString = "repoData";
+// Holds previous storage for feed purposes
+var prevStorage = [];
 // Storage variable for followed repos
-var storage = null;
+var storage = [];
+// Storage to contain current feed display
+var feed = [];
 
-export function getFollowing() {
-    return storage;
-}
-
-export function updateAllRepos() {
-    if(storage === null) return;
-    if(storage.length == 0) return;
-    storage.forEach(repo => {
-        // TODO
-    });
-}
 
 /* Modals */
+// Modal Display
 var modal = document.getElementById('simpleModal');
 var modalBtn = document.getElementById('addFollow');
 var modalForm = document.getElementById('searchForm');
 var closeBtn = document.getElementById('closeBtn');
-// Receive user input
+
+// Modal Input
 var userSearch = document.getElementById('searchUser');
 var repoSearch = document.getElementById("searchRepo");
 var repoLink = document.getElementById('submitRepo');
+let radioName = document.getElementById("radioName");
+let radioLink = document.getElementById("radioLink");
+
+/* Storage Functions */
+
+export function setup() {
+    loadStorage();
+    prevStorage = storage;
+    updateRepoData();
+    saveStorage();
+    updateDisplay();
+}
+
+function loadStorage() {
+    try {
+        storage = JSON.parse(localStorage.getItem(storageString));
+        if(storage == null) storage = [];
+        console.log(storage);
+    }
+    // If there is an error in the localStorage, just set an empty array
+    catch {
+        storage = [];
+    }
+}
+
+function saveStorage() {
+    if (storage != null) localStorage.setItem(storageString, JSON.stringify(storage));
+}
+
+function addRepo(repo) {
+    let found = storage.find(r => {
+        return r.fullName == repo.fullName
+    });
+    if (found == undefined) {
+        storage.push(repo);
+        saveStorage();
+    } else {
+        // The user entered a duplicate repository!
+        // TODO: Handle this
+    }
+}
+
+function removeRepo(repo) {
+    storage = storage.filter(r => {
+        return r.fullName != repo.fullName
+    });
+}
+
+/* Feed and Repo Display */
+
+function updateDisplay(updateFeed, repo = null) {
+    refreshRepoDisplay();
+    // Generate feed before this?
+    refreshFeedDisplay();
+}
+
+function updateRepoData() {
+    storage.forEach(repo => {
+        let newRepo = getRepo(repo.owner, repo.name);
+        // For every property in the repo, set it to the new value
+        for (let key in newRepo) repo[key] = newRepo[key];
+    });
+}
+
+function updateFeedData() {
+
+}
+
+function createRepoHTML(repo) {
+    let container = document.createElement("div");
+    let displayTitle = document.createElement("h3");
+    let visitRepo = document.createElement("a");
+    let updateTime = document.createElement("div");
+    let watchers = document.createElement("div");
+    let progLang = document.createElement("div");
+    let forkCount = document.createElement("div");
+    let openIssueCount = document.createElement("div");
+    let subCount = document.createElement("div");
+    let createdTime = document.createElement("div");
+    let unfollowBtn = document.createElement("button");
+
+    container.setAttribute("class", "panel-child");
+    displayTitle.textContent = `${repo.name} (${repo.owner})`;
+    visitRepo.textContent = "Visit this Repo";
+    visitRepo.setAttribute("href", repo.svn_url);
+    updateTime.textContent = `Time Updated: ${repo.updateTime}`;
+    watchers.textContent = `Number of Watchers: ${repo.watchers}`;
+    progLang.textContent = `Programming Language: ${repo.programLang}`;
+    forkCount.textContent = `Number of Forks: ${repo.forks}`;
+    openIssueCount.textContent = `Number of Issues: ${repo.issues}`;
+    subCount.textContent = `Subscriber Count: ${repo.subs}`;
+    createdTime.textContent = `Date Created: ${repo.bornDate}`;
+    unfollowBtn.textContent = "Unfollow";
+    unfollowBtn.setAttribute("class", "exitButton");
+    // Add event listener to unfollow the repo when it's clicked
+    unfollowBtn.addEventListener('click', unfollowRepo);
+
+    container.append(displayTitle, watchers, progLang, forkCount, openIssueCount, subCount, updateTime, createdTime, unfollowBtn, visitRepo);
+    return container;
+}
+
+function refreshRepoDisplay() {
+    storage.sort((first, second) => {
+        if (first.name < second.name) return -1;
+        else if (first.name > second.name) return 1;
+        else return 0;
+    })
+    storage.forEach(repo => {
+        let repoHTML = createRepoHTML(repo);
+        followingEl.appendChild(repoHTML);
+    });
+}
+
+function refreshFeedDisplay() {
+    // TODO
+    feed.sort((first, second) => {
+        if (first.name < second.name) return -1;
+        else if (first.name > second.name) return 1;
+        else return 0;
+    })
+    feed.forEach(repo => {
+        let repoHTML = createRepoHTML(repo);
+        followingEl.appendChild(repoHTML);
+    });
+}
 
 
-/* Event Handlers */
+/* Modal Helper Functions */
+
 // Function to open modal
-function openModal(){
+function openModal() {
     modal.style.display = 'block';
 }
+
 // Function to close modal
-function closeModal(){
+function closeModal() {
     modal.style.display = 'none';
 }
+
 // Function to close outside window
-function outsideClick(e){
-    if(e.target == modal){
+function outsideClick(e) {
+    if (e.target == modal) {
         closeModal();
     }
 }
+
+// Function to get user input from form submission
 function getUserInput(event) {
-    
-    // Might need this?
+
+    // Prevent form page refresh
     event.preventDefault();
-    
-    let r = document.getElementById("radName");
-    let m = document.getElementById("repLink");
-    
-    
-    if(r.checked) {
-        console.log(userSearch.value, repoSearch.value);
+
+    let ownerName;
+    let repoName;
+
+    if (radioName.checked) {
 
         // Take in user input 
-        let userName = userSearch.value.trim();
-        let repoName = repoSearch.value; // No trim needed because Repo could have spaces in name
-        
-        console.log(userName, repoName);
+        ownerName = userSearch.value.trim();
 
-            getRepo(following, userName, repoName);
-            userSearch.value = "";
-            repoSearch.value = "";
-        
-    }
-    
-    else if (m.checked) {
+        // Need to replace spaces with hyphens for how repo names are stored
+        repoName = repoSearch.value.trim().replace(/ /g, '-');
+
+
+    } else if (radioLink.checked) {
         // Take in user input and separate string into arrays by ".com/"
         var link = repoLink.value;
         var linkArray = link.split(".com/");
-        
+
         // Tester code to console.log(linkArray);
         // Split in array string by "/" revealing owner and repo name
         var linkArrayFinal = linkArray[1].split("/");
-        
-        // Tester code to console.log(linkArrayFinal); 
-        let foundOwner = linkArrayFinal[0].trim();
-        let foundRepo = linkArrayFinal[1].trim();
-        console.log(foundOwner, foundRepo);
-        getRepo(following, foundOwner, foundRepo);
 
-        // Clear data field
-        repoLink.value = "";
+        // Tester code to console.log(linkArrayFinal); 
+        ownerName = linkArrayFinal[0].trim();
+        repoName = linkArrayFinal[1].trim();
+    } else {
+        // Neither one was selected, we can set one active by default
     }
-    else {
-        alert("Please Select an Option Below.")
-    }
-    
-     
+    let foundRepo;
+    // Owner name and repo name should be found by now
+    getRepo(ownerName, repoName)
+        .then((repo) => {
+            if(repo) {
+                foundRepo = repo;
+                addRepo(repo);
+                followingEl.appendChild(createRepoHTML(repo));
+            }
+    });
+    // TODO: Need to update display after this, but just to add a single repo to list
+
+    // Need to clear all 3 each time just to make sure user information is cleared out
+    userSearch.value = "";
+    repoSearch.value = "";
+    repoLink.value = "";
+    // Close modal manually after submit has been processed
     closeModal();
-    
 }
 
 function unfollowRepo(event) {
-    // event.preventDefault()
-    // event.target.closest("div.panel-child").remove();
+    // TODO: Need to remove the repo from storage
 }
 
-/* API Requests */
-function getRepo(followingEl, owner, repo) { 
-    let url = `https://api.github.com/repos/${owner}/${repo}`
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            let div = document.createElement("div");
-            let h3 = document.createElement("h3");
-            let a = document.createElement("a");
-            let feat_1 = document.createElement("div");
-            let feat_2 = document.createElement("div");
-            let feat_3 = document.createElement("div");
-            let feat_4 = document.createElement("div");
-            let feat_5 = document.createElement("div");
-            let feat_6 = document.createElement("div");
-            let feat_7 = document.createElement("div");
-            let x = document.createElement("button");
 
-            // Info to be dispalyed in following section per each repo
-            let updateTime = `${data.updated_at}`; 
-            let watchers = `${data.watchers_count}`; 
-            let programLang= `${data.language}`; 
-            let forks = `${data.forks_count}`; 
-            let issues = `${data.open_issues_count}`; 
-            let subs = `${data.subscribers_count}`; 
-            let bornDate = `${data.created_at}`;
-
-
-            div.setAttribute("class", "panel-child");
-            h3.textContent = data.name;
-            a.textContent = "Visit this Repo";
-            a.setAttribute("href", data.svn_url);
-            feat_1.textContent = `Time Updated: ${updateTime}`;
-            feat_2.textContent = `Number of Watchers: ${watchers}`;
-            feat_3.textContent = `Programming Language: ${programLang}`;
-            feat_4.textContent = `Number of Forks: ${forks}`;
-            feat_5.textContent = `Number of Issues: ${issues}`;
-            feat_6.textContent = `Subscriber Count: ${subs}`;
-            feat_7.textContent = `Date Created: ${bornDate}`;          
-            x.textContent = "Unfollow";
-            x.setAttribute("class", "exitButton");
-            followingEl.appendChild(div);
-            div.append(h3, feat_1, feat_2, feat_3, feat_4, feat_5, feat_6, feat_7, x, a);
-
-
-            
-            
-            // Remove following repo
-            var unfollowBtn = document.querySelector('.exitButton');
-        })
-        .catch(ex => console.log("error"));
-}
-
-/* Event Listeners */
+/* Modal Event Listeners */
 // Listen for open click
 modalBtn.addEventListener('click', openModal);
 // Listen for close click
@@ -167,5 +236,33 @@ closeBtn.addEventListener('click', closeModal);
 window.addEventListener('click', outsideClick);
 // Listen for submit click
 modalForm.addEventListener('submit', getUserInput);
-// Listen for unfollowClick (added)
-// unfollowBtn.addEventListener('click', unfollowRepo);
+
+/* API Requests */
+function getRepo(owner, repo) {
+    let url = `https://api.github.com/repos/${owner}/${repo}`
+    return fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            // Object containing info to be put in storage and displayed
+            let repo = {
+                fullName: data.full_name,
+                name: data.name,
+                link: data.svn_url,
+                updateTime: data.updated_at,
+                watchers: data.watchers_count,
+                programLang: data.language,
+                forks: data.forks_count,
+                issues: data.open_issues_count,
+                subs: data.subscribers_count,
+                bornDate: data.created_at,
+                owner: data.owner.login
+            }
+            return repo;
+        })
+        .catch(ex => {
+            // There was an error getting the URL response.
+            console.log("Error fetching repository from user-provided input.");
+            console.log(ex);
+            return _;
+        });
+}

@@ -1,6 +1,6 @@
 // import {getTrending} from "./modules/populate.js";
 import * as following from "./modules/following.js";
-import * as feed from "./modules/feed.js";
+// import * as feed from "./modules/feed.js";
 import * as news from "./modules/news.js";
 
 /* Feed */
@@ -12,8 +12,10 @@ var followingEl = document.getElementById("following");
 /* Popular */
 var newsEl = document.getElementById("news");
 
-feed.setup(feedEl, following);
+// feed.setup(feedEl, following);
 
-following.setFeed(feed);
-following.setFollowing(followingEl);
+// following.setFeed(feed);
+// following.setFollowing(followingEl);
 news.getNews(newsEl)
+
+following.setup();
