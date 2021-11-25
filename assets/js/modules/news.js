@@ -36,6 +36,7 @@ export function populateNews(data, newsEl) {
     h3.textContent = data.title
     a.textContent = "Visit this Article"
     a.setAttribute("href", data.url)
+    a.setAttribute("target", "_blank")
     newsEl.appendChild(div)
     div.append(h3, a)
 }
