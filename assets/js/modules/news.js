@@ -1,4 +1,4 @@
-const url = `https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty`
+let url = `https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty`
 const storyBtn = document.getElementById("changeNews")
 const newsModal = document.getElementById('newsModal');
 const storyType = document.getElementById('storyType');
@@ -6,7 +6,10 @@ const closeNewsModal = document.getElementById('closeNewsModal');
 var news = document.getElementById("news");
 
 
-export function getNews (newsEl) {
+export function getNews (newsEl,story) {
+    if (story) {
+        let url = `https://hacker-news.firebaseio.com/v0/${story}.json?print=pretty`
+    }
     fetch(url)
     .then(response => response.json())
     .then(data => {
