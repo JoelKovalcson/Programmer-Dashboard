@@ -181,8 +181,9 @@ function refreshRepoDisplay() {
         if (first.name < second.name) return -1;
         else if (first.name > second.name) return 1;
         else return 0;
-    })
+    });
     storage.forEach(repo => {
+        followingEl.innerHTML = "";
         let repoHTML = createRepoHTML(repo);
         followingEl.appendChild(repoHTML);
     });
