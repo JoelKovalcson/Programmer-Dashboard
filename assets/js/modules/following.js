@@ -155,7 +155,9 @@ function getRepo(followingEl, owner, repo) {
             // Remove following repo
             var unfollowBtn = document.querySelector('.exitButton');
         })
-        .catch(ex => console.log("error"));
+        .catch(ex => {
+            console.log("error");
+        })
 }
 
 /* Event Listeners */
