@@ -15,15 +15,15 @@ export function getNews (newsEl,story = false) {
     .then(response => response.json())
     .then(data => {
         newsEl.innerHTML = "";
-        for(var i = 0 ; i < data.length; i++) {
-            if(i < 25) {
-                let itemUrl = `https://hacker-news.firebaseio.com/v0/item/${data[i]}.json?print=pretty`
-                fetch(itemUrl)
-                .then(response => response.json())
-                .then(data => {
-                    populateNews(data, newsEl)
-                })
-            }    
+        let number = numberArticles.value
+        for(var i = 0 ; i < number; i++) {
+            let itemUrl = `https://hacker-news.firebaseio.com/v0/item/${data[i]}.json?print=pretty`
+            fetch(itemUrl)
+            .then(response => response.json())
+            .then(data => {
+            populateNews(data, newsEl)
+            })
+                
         }
     })
 }

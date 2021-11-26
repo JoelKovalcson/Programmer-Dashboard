@@ -53,38 +53,46 @@
             <div class="modalHeader">
                 <span id="closeNewsModal" class="closeBtn">&times;</span>
             </div>
+            <h3 class="text-3xl text-center">Select your stories</h3>
             <div class="modalBody">
                 <form id="storyType" class="searchForm">
-                    <span class="radio-wrapper text-center">
-                        <h3 class="text-xl">Select your stories</h3>
-                        <input type="radio" name="story" id="topstories" class="story">
-                        <label for="topstories">Top Stories</label>
-                        <br>
-                        <input type="radio" name="story" id="newstories" class="story">
-                        <label for="newstories">New Stories</label>
-                        <br>
-                        <input type="radio" name="story" id="beststories" class="story">
-                        <label for="beststories">Best Stories</label>
-                        <br>
-                        <input type="radio" name="story" id="askstories" class="story">
-                        <label for="askstories">Ask Stories</label>
-                        <br>
-                        <input type="radio" name="story" id="showstories" class="story">
-                        <label for="showstories">Show Stories</label>
-                        <br>
-                        <input type="radio" name="story" id="jobstories" class="story">
-                        <label for="jobstories">Job Stories</label>
+                    <span class="radio-wrapper text-center grid grid-rows-3 grid-cols-2">
+                        <div>
+                            <input type="radio" name="story" id="topstories" class="story"> 
+                            <label for="topstories">Top Stories</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="story" id="newstories" class="story">
+                            <label for="newstories">New Stories</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="story" id="beststories" class="story">
+                            <label for="beststories">Best Stories</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="story" id="askstories" class="story">
+                            <label for="askstories">Ask Stories</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="story" id="showstories" class="story">
+                            <label for="showstories">Show Stories</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="story" id="jobstories" class="story">
+                            <label for="jobstories">Job Stories</label>
+                        </div>    
                     </span>
-                        <br>
+                    <div class="grid grid-cols-2">
                         <label for="numberArticles">Number of articles displayed</label>
                         <select name="numberArticles" id="numberArticles">
                             <option value="5">5</option>
                             <option value="10">10</option>
                             <option value="15">15</option>
                             <option value="20">20</option>
-                            <option value="25">25</option>
+                            <option value="25" selected>25</option>
                         </select>
-                    <button type="submit" id="searchFilter">Submit</button>
+                    </div>
+                    <button type="submit" id="searchFilter">Submit</button>    
                 </form>
             </div>
         </div>
