@@ -29,13 +29,30 @@ let radioLink = document.getElementById("radioLink");
 /* Storage Functions */
 
 export function setup() {
+    // Load localStorage
     loadStorage();
-    prevStorage = storage;
+    // Set prevStorage to that local storage
+    setPrevStorage();
+    // Get new data from APIs
     updateRepoData().then(() => {
+        // Save new data to localStorage
         saveStorage();
+        // Updated differences to feed array
         updateFeedData();
+        // Display all data
         updateDisplay();
     });
+}
+
+function setPrevStorage() {
+    prevStorage = [];
+    for (let i in storage) {
+        let obj = {};
+        for (let key in storage[i]) {
+            obj[key] = storage[i][key];
+        }
+        prevStorage.push(obj);
+    }
 }
 
 function loadStorage() {
@@ -129,7 +146,7 @@ function updateFeedData() {
                     // Modify the feed item with new values
                     for (let key in foundFeed) {
                         // If the property exists in the new diff
-                        if(diffR[key] != undefined) {
+                        if (diffR[key] != undefined) {
                             // Change the value
                             foundFeed[key] = diffR[key];
                         }
@@ -185,19 +202,74 @@ function createRepoHTML(repo) {
     displayTitle.textContent = `${repo.name} (${repo.owner})`;
     visitRepo.textContent = "Visit this Repo";
     visitRepo.setAttribute("href", repo.svn_url);
-    updateTime.textContent = `Time Updated: ${repo.updateTime}`;
+    updateTime.textContent = `Time Updated: ${moment(repo.updateTime).format("MMMM Do YYYY, h:mm:ss a")}`;
     watchers.textContent = `Number of Watchers: ${repo.watchers}`;
     progLang.textContent = `Programming Language: ${repo.programLang}`;
     forkCount.textContent = `Number of Forks: ${repo.forks}`;
     openIssueCount.textContent = `Number of Issues: ${repo.issues}`;
     subCount.textContent = `Subscriber Count: ${repo.subs}`;
-    createdTime.textContent = `Date Created: ${repo.bornDate}`;
+    createdTime.textContent = `Date Created: ${moment(repo.bornDate).format("MMMM Do YYYY, h:mm:ss a")}`;
     unfollowBtn.textContent = "Unfollow";
     unfollowBtn.setAttribute("class", "exitButton");
     // Add event listener to unfollow the repo when it's clicked
     unfollowBtn.addEventListener('click', unfollowRepo);
 
     container.append(displayTitle, watchers, progLang, forkCount, openIssueCount, subCount, updateTime, createdTime, unfollowBtn, visitRepo);
+    return container;
+}
+
+function createFeedHTML(repo) {
+    let container = document.createElement("div");
+    container.setAttribute("class", "panel-child");
+    
+    let displayTitle = document.createElement("h3");
+    displayTitle.textContent = `${repo.name} (${repo.owner})`;
+    container.append(displayTitle);
+
+    let watchers;
+    let progLang;
+    let forkCount;
+    let openIssueCount;
+    let subCount;
+    let updateTime;
+    // Optional items if they changed
+    if (repo.watchers != undefined) {
+        watchers = document.createElement("div");
+        watchers.textContent = `Number of Watchers: ${repo.watchers}`;
+        container.append(watchers);
+    }
+    if (repo.programLang != undefined) {
+        progLang = document.createElement("div");
+        progLang.textContent = `Programming Language: ${repo.programLang}`;
+        container.append(progLang);
+    }
+    if (repo.forks != undefined) {
+        forkCount = document.createElement("div");
+        forkCount.textContent = `Number of Forks: ${repo.forks}`;
+        container.append(forkCount);
+    }
+    if (repo.issues != undefined) {
+        openIssueCount = document.createElement("div");
+        openIssueCount.textContent = `Number of Issues: ${repo.issues}`;
+        container.append(openIssueCount);
+    }
+    if (repo.subs != undefined) {
+        subCount = document.createElement("div");
+        subCount.textContent = `Subscriber Count: ${repo.subs}`;
+        container.append(subCount);
+    }
+    if (repo.updateTime != undefined) {
+        updateTime = document.createElement("div");
+        updateTime.textContent = `Time Updated: ${moment(repo.updateTime).format("MMMM Do YYYY, h:mm:ss a")}`;
+        container.append(updateTime);
+    }
+
+    // Always included
+    let visitRepo = document.createElement("a");
+    visitRepo.textContent = "Visit this Repo";
+    visitRepo.setAttribute("href", repo.svn_url);
+
+    container.append(visitRepo);
     return container;
 }
 
@@ -209,7 +281,7 @@ function refreshFeedDisplay() {
     })
     feed.forEach(repo => {
         feedEl.innerHTML = "";
-        let repoHTML = createRepoHTML(repo);
+        let repoHTML = createFeedHTML(repo);
         feedEl.appendChild(repoHTML);
     });
 }
