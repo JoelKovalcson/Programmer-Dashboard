@@ -286,8 +286,8 @@ function refreshFeedDisplay() {
         else if (first.name > second.name) return 1;
         else return 0;
     })
+    feedEl.innerHTML = "";
     feed.forEach(repo => {
-        feedEl.innerHTML = "";
         let repoHTML = createFeedHTML(repo);
         feedEl.appendChild(repoHTML);
     });
