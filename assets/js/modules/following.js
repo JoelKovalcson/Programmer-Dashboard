@@ -7,7 +7,7 @@ const storageString = "repoData";
 // Holds previous storage for feed purposes
 var prevStorage = [];
 // Storage variable for followed repos
-var storage = [];
+export var storage = [];
 // Storage to contain current feed display
 var feed = [];
 
@@ -31,16 +31,16 @@ let radioLink = document.getElementById("radioLink");
 export function setup() {
     loadStorage();
     prevStorage = storage;
-    updateRepoData();
-    saveStorage();
-    updateDisplay();
+    updateRepoData().then(() => {
+        saveStorage();
+        updateDisplay();
+    });
 }
 
 function loadStorage() {
     try {
         storage = JSON.parse(localStorage.getItem(storageString));
-        if(storage == null) storage = [];
-        console.log(storage);
+        if (storage == null) storage = [];
     }
     // If there is an error in the localStorage, just set an empty array
     catch {
@@ -79,17 +79,12 @@ function updateDisplay(updateFeed, repo = null) {
     refreshFeedDisplay();
 }
 
-function updateRepoData() {
-    storage.forEach(async repo => {
-        let newRepo = await getRepo(repo.owner, repo.name);
-        console.log(repo);
+async function updateRepoData() {
+    for (let i in storage) {
+        let newRepo = await getRepo(storage[i].owner, storage[i].name);
         // For every property in the repo, set it to the new value    
-        for (let key in newRepo) repo[key] = newRepo[key];
-        console.log(newRepo);
-        console.log(repo);
-        
-    });
-    console.log(storage);
+        for (let key in newRepo) storage[i][key] = newRepo[key];
+    }
 }
 
 function updateFeedData() {
@@ -211,12 +206,12 @@ function getUserInput(event) {
     // Owner name and repo name should be found by now
     getRepo(ownerName, repoName)
         .then((repo) => {
-            if(repo) {
+            if (repo) {
                 foundRepo = repo;
                 addRepo(repo);
                 followingEl.appendChild(createRepoHTML(repo));
             }
-    });
+        });
     // TODO: Need to update display after this, but just to add a single repo to list
 
     // Need to clear all 3 each time just to make sure user information is cleared out
