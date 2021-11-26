@@ -202,13 +202,13 @@ function createRepoHTML(repo) {
     displayTitle.textContent = `${repo.name} (${repo.owner})`;
     visitRepo.textContent = "Visit this Repo";
     visitRepo.setAttribute("href", repo.svn_url);
-    updateTime.textContent = `Time Updated: ${moment(repo.updateTime).format("MMMM Do YYYY, h:mm:ss a")}`;
+    updateTime.textContent = `Time Updated: ${repo.updateTime}`;
     watchers.textContent = `Number of Watchers: ${repo.watchers}`;
     progLang.textContent = `Programming Language: ${repo.programLang}`;
     forkCount.textContent = `Number of Forks: ${repo.forks}`;
     openIssueCount.textContent = `Number of Issues: ${repo.issues}`;
     subCount.textContent = `Subscriber Count: ${repo.subs}`;
-    createdTime.textContent = `Date Created: ${moment(repo.bornDate).format("MMMM Do YYYY, h:mm:ss a")}`;
+    createdTime.textContent = `Date Created: ${repo.bornDate}`;
     unfollowBtn.textContent = "Unfollow";
     unfollowBtn.setAttribute("class", "exitButton");
     // Add event listener to unfollow the repo when it's clicked
@@ -260,7 +260,7 @@ function createFeedHTML(repo) {
     }
     if (repo.updateTime != undefined) {
         updateTime = document.createElement("div");
-        updateTime.textContent = `Time Updated: ${moment(repo.updateTime).format("MMMM Do YYYY, h:mm:ss a")}`;
+        updateTime.textContent = `Time Updated: ${repo.updateTime}`;
         container.append(updateTime);
     }
 
@@ -385,13 +385,13 @@ function getRepo(owner, repo) {
                 fullName: data.full_name,
                 name: data.name,
                 link: data.svn_url,
-                updateTime: data.updated_at,
+                updateTime: moment(data.updated_at).format("MMMM Do YYYY, h:mm:ss a"),
                 watchers: data.watchers_count,
                 programLang: data.language,
                 forks: data.forks_count,
                 issues: data.open_issues_count,
                 subs: data.subscribers_count,
-                bornDate: data.created_at,
+                bornDate: moment(data.created_at).format("MMMM Do YYYY, h:mm:ss a"),
                 owner: data.owner.login
             }
             return repo;
