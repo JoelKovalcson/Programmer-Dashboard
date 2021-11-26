@@ -29,20 +29,27 @@
     <!-- Follow Add Modal -->
     <div id="simpleModal" class="modal">
         <div class="modalContent">
-            <div class="modalHeader">
-                <span id="closeBtn" class="closeBtn">&times;</span>
-            </div>
+                <button id="closeBtn" class="closeBtn">&times;</button>
+                <h3 class="text-4xl text-center border-b-2 p-2 mb-2">Follow a User or Repository</h3>
             <div class="modalBody">
                 <form id="searchForm" class="searchForm">
-                    <input type="radio" name="select" id="radioName">
-                    <label for="searchUser">Provide a Username:</label>
-                    <input type="text" id="searchUser" name="searchUser">
-                    <label for="searchRepo">Provide a repository name:</label>
-                    <input type="text" id="searchRepo" name="searchRepo">
-                    <input type="radio" name="select" id="radioLink">
-                    <label for="submitRepo">Provide a repository link:</label>
-                    <input type="text" id="submitRepo" name="submitRepo">
-                    <button type="submit" id="btnSubmit">Submit</button>
+                    <span class="radio-wrapper text-center">
+                        <div class="m-2 text-md">
+                            <input type="radio" name="select" id="radioName">
+                            <label for="searchUser">Provide a Username:</label>
+                            <input type="text" id="searchUser" name="searchUser">
+                        </div>
+                        <div class="m-2">    
+                            <label for="searchRepo">Provide a repository name:</label>
+                            <input type="text" id="searchRepo" name="searchRepo">
+                        </div>
+                        <div class="m-2">    
+                            <input type="radio" name="select" id="radioLink">    
+                            <label for="submitRepo">Provide a repository link:</label>
+                            <input type="text" id="submitRepo" name="submitRepo">
+                        </div>
+                    </span>        
+                    <button type="submit" id="btnSubmit" class="text-lg text-left">Submit</button>
                 </form>
             </div>
         </div>
@@ -50,13 +57,11 @@
 
     <div id="newsModal" class="modal">
         <div class="modalContent">
-            <div class="modalHeader">
-                <span id="closeNewsModal" class="closeBtn">&times;</span>
-            </div>
-            <h3 class="text-3xl text-center">Select your stories</h3>
+                <button id="closeNewsModal" class="closeBtn">&times;</button>
+                <h3 class="text-4xl text-center border-b-2 p-2 mb-2">Select your stories</h3>
             <div class="modalBody">
                 <form id="storyType" class="searchForm">
-                    <span class="radio-wrapper text-center grid grid-rows-3 grid-cols-2">
+                    <span class="radio-wrapper text-center grid grid-rows-3 grid-cols-2 text-md">
                         <div>
                             <input type="radio" name="story" id="topstories" class="story"> 
                             <label for="topstories">Top Stories</label>
@@ -82,9 +87,9 @@
                             <label for="jobstories">Job Stories</label>
                         </div>    
                     </span>
-                    <div class="grid grid-cols-2">
-                        <label for="numberArticles">Number of articles displayed</label>
-                        <select name="numberArticles" id="numberArticles">
+                    <div class="text-center mt-2">
+                        <label for="numberArticles" class="text-lg">Number of articles displayed</label>
+                        <select name="numberArticles" id="numberArticles" class="box-content w-14 text-black">
                             <option value="5">5</option>
                             <option value="10">10</option>
                             <option value="15">15</option>
@@ -92,7 +97,7 @@
                             <option value="25" selected>25</option>
                         </select>
                     </div>
-                    <button type="submit" id="searchFilter">Submit</button>    
+                    <button type="submit" id="searchFilter" class="text-lg">Submit</button>    
                 </form>
             </div>
         </div>
