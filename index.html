@@ -12,16 +12,12 @@
 
 <body class="">
     <!-- Navigation/Header -->
-    <header class="h-16 m-2">
+    <header class="h-16 m-2 mb-6">
+        <button id="clearData" class="menu-button text-center text-xl">Clear Data</button>
+        <button id="refreshAll" class="panel-button text-center text-xl">Refresh All</button>
         <h1 class="title text-5xl text-center">
             GitHub At-A-Glance
         </h1>
-        <ul class="menu text-center text-xl flex flex-wrap">
-            <li>
-                <button id="clearData" class="menu-button">Clear Data</button>
-                <button id="refreshAll" class="panel-button">Refresh All</button>
-            </li>
-        </ul>
     </header>
 
 
@@ -103,66 +99,66 @@
         </div>
     </div>
 
-    
     <!-- Main Body -->
-    <div class="flex flex-col md:flex-row justify-around m-3">
-        <!-- Left Panel (Feed) -->
-        <section class="flex-1 panel m-1">
-            <h2 class="text-center text-3xl font-bold">
-                Feed
-            </h2>
-            <button id="refreshFeed" class="panel-button">Refresh</button>
-            <div id="feed"></div>
-            <!-- Sample Child 
-            <div class="feed-child">
-                <h3>Title</h3>
-                <p>Content (This can include more children)</p>
-                ... Add anything you'd like
-                <a href="repo-link">Visit this repository</a>
+    <main>
+        <div class="flex flex-col md:flex-row justify-around m-3">
+            <!-- Left Panel (Feed) -->
+            <section class="flex-1 panel m-1">
+                <h2 class="text-center text-3xl font-bold">
+                    Feed
+                </h2>
+                <button id="refreshFeed" class="panel-button">Refresh</button>
+                <div id="feed"></div>
+                <!-- Sample Child 
+                <div class="feed-child">
+                    <h3>Title</h3>
+                    <p>Content (This can include more children)</p>
+                    ... Add anything you'd like
+                    <a href="repo-link">Visit this repository</a>
+                </div>
+                -->
+            </section>
+
+            <!-- Right Panel (Following/Popular)-->
+            <div class="flex-1 flex flex-col">
+                <!-- Top Panel (Following) -->
+                <section class="panel m-1">
+                    <h2 class="text-center text-3xl font-bold">
+                        Following
+                    </h2>
+                    <button id="refreshFollowing" class="panel-button">Refresh</button>
+                    <button id="addFollow" class="panel-button">Add</button>
+                    <div id="following"></div>
+                    <!-- Sample Child 
+                    <div class="following-child">
+                        <h3>Repository Name</h3>
+                        <p>Example Content</p>
+                        ... Add anything you'd like
+                        <a href="repo-link">Visit this repository</a>
+                    </div>
+                    -->
+                </section>
+                <!-- Bottom Panel (Popular) -->
+                <section class="panel m-1">
+                    <h2 class="text-center text-3xl font-bold">
+                        News
+                    </h2>
+                    <!-- <button id="refreshPopular" class="panel-button">Refresh</button> -->
+                    <button id="changeNews" class="panel-button">Story Type</button>
+                    <div id="news"></div>
+                    <!-- Sample Child 
+                    <div class="popular-child">
+                        <h3>Repository Name</h3>
+                        <p>Example Content</p>
+                        ... Add anything you'd like
+                        <a href="repo-link">Visit this repository</a>
+                    </div>
+                    -->
+                </section>
             </div>
-            -->
-        </section>
 
-        <!-- Right Panel (Following/Popular)-->
-        <div class="flex-1 flex flex-col">
-            <!-- Top Panel (Following) -->
-            <section class="panel m-1">
-                <h2 class="text-center text-3xl font-bold">
-                    Following
-                </h2>
-                <button id="refreshFollowing" class="panel-button">Refresh</button>
-                <button id="addFollow" class="panel-button">Add</button>
-                <div id="following"></div>
-                <!-- Sample Child 
-                <div class="following-child">
-                    <h3>Repository Name</h3>
-                    <p>Example Content</p>
-                    ... Add anything you'd like
-                    <a href="repo-link">Visit this repository</a>
-                </div>
-                -->
-            </section>
-            <!-- Bottom Panel (Popular) -->
-            <section class="panel m-1">
-                <h2 class="text-center text-3xl font-bold">
-                    News
-                </h2>
-                <!-- <button id="refreshPopular" class="panel-button">Refresh</button> -->
-                <button id="changeNews" class="panel-button">Story Type</button>
-                <div id="news"></div>
-                <!-- Sample Child 
-                <div class="popular-child">
-                    <h3>Repository Name</h3>
-                    <p>Example Content</p>
-                    ... Add anything you'd like
-                    <a href="repo-link">Visit this repository</a>
-                </div>
-                -->
-            </section>
         </div>
-
-    </div>
-
+    </main>    
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Moment.js -->
