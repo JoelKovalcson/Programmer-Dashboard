@@ -352,7 +352,7 @@ function getUserInput(event) {
         .then((repo) => {
             if (repo) {
                 foundRepo = repo;
-                if(addRepo(repo)) followingEl.appendChild(createRepoHTML(repo));
+                if (addRepo(repo)) followingEl.appendChild(createRepoHTML(repo));
             }
         });
     // TODO: Need to update display after this, but just to add a single repo to list
@@ -369,7 +369,7 @@ function unfollowRepo(event) {
     // TODO: Need to remove the repo from storage
 
     let removeThis = $(event.target).parent();
-    
+
     let repoName = removeThis.children("h3").text();
     // Repo-Name (Owner) -> Owner/Repo-Name
     repoName = repoName.split(' ');
@@ -424,4 +424,3 @@ closeBtn.addEventListener('click', closeModal);
 window.addEventListener('click', outsideClick);
 // Listen for submit click
 modalForm.addEventListener('submit', getUserInput);
-
