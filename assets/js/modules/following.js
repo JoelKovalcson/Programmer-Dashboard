@@ -7,7 +7,7 @@ const storageString = "repoData";
 // Holds previous storage for feed purposes
 var prevStorage = [];
 // Storage variable for followed repos
-export var storage = [];
+var storage = [];
 // Storage to contain current feed display
 var feed = [];
 
@@ -33,6 +33,7 @@ export function setup() {
     prevStorage = storage;
     updateRepoData().then(() => {
         saveStorage();
+        updateFeedData();
         updateDisplay();
     });
 }
@@ -73,12 +74,7 @@ function removeRepo(repo) {
 
 /* Feed and Repo Display */
 
-function updateDisplay(updateFeed, repo = null) {
-    refreshRepoDisplay();
-    // Generate feed before this?
-    refreshFeedDisplay();
-}
-
+// Data update functions
 async function updateRepoData() {
     for (let i in storage) {
         let newRepo = await getRepo(storage[i].owner, storage[i].name);
@@ -88,7 +84,88 @@ async function updateRepoData() {
 }
 
 function updateFeedData() {
+    prevStorage.forEach(repo => {
+        let fullName = repo.fullName;
+        // Find the repo in the current storage
+        let foundStorage = storage.find(r => {
+            return r.fullName == fullName;
+        });
+        // If it's found, then we get differences
+        if (foundStorage != undefined) {
+            // Initialize differences to being an empty object
+            let modified = false;
+            let diffR = {};
+            // Look through every key
+            for (let key in foundStorage) {
+                // If they value doesn't match, add it to the diff object
+                if (foundStorage[key] != repo[key]) {
+                    diffR[key] = `${repo[key]} -> ${foundStorage[key]}`;
+                    modified = true;
+                }
+                // Make sure full name, owner, name, and svn_url is added regardless of changes to keep track of object
+                else if (key == "fullName") diffR[key] = repo[key];
+                else if (key == "name") diffR[key] = repo[key];
+                else if (key == "owner") diffR[key] = repo[key];
+                else if (key == "svn_url") diffR[key] = repo[key];
+            }
 
+            // Then look for an existing object in the feed
+            let foundFeed = feed.find(r => {
+                return r.fullName == fullName;
+            });
+            // If there are no differences
+            if (!modified) {
+                // Remove item from feed if it exists
+                if (foundFeed != undefined) {
+                    feed = feed.filter(r => {
+                        return r.fullName != fullName;
+                    });
+                }
+            }
+            // There were differences
+            else {
+                // If an existing feed 
+                if (foundFeed != undefined) {
+                    // Modify the feed item with new values
+                    for (let key in foundFeed) {
+                        // If the property exists in the new diff
+                        if(diffR[key] != undefined) {
+                            // Change the value
+                            foundFeed[key] = diffR[key];
+                        }
+                        // The value doesn't exist
+                        else {
+                            // Delete it from the feed item
+                            delete foundFeed[key];
+                        }
+                    }
+                }
+                // If there is no existing feed, just add it
+                else {
+                    feed.push(diffR);
+                }
+            }
+        }
+    });
+}
+
+// Display and helper functions
+function updateDisplay(updateFeed, repo = null) {
+    refreshRepoDisplay();
+    // Generate feed before this?
+    refreshFeedDisplay();
+}
+
+function refreshRepoDisplay() {
+    storage.sort((first, second) => {
+        if (first.name < second.name) return -1;
+        else if (first.name > second.name) return 1;
+        else return 0;
+    })
+    storage.forEach(repo => {
+        let repoHTML = createRepoHTML(repo);
+        followingEl.appendChild(repoHTML);
+    });
 }
 
 function createRepoHTML(repo) {
@@ -124,28 +201,16 @@ function createRepoHTML(repo) {
     return container;
 }
 
-function refreshRepoDisplay() {
-    storage.sort((first, second) => {
-        if (first.name < second.name) return -1;
-        else if (first.name > second.name) return 1;
-        else return 0;
-    })
-    storage.forEach(repo => {
-        let repoHTML = createRepoHTML(repo);
-        followingEl.appendChild(repoHTML);
-    });
-}
-
 function refreshFeedDisplay() {
-    // TODO
     feed.sort((first, second) => {
         if (first.name < second.name) return -1;
         else if (first.name > second.name) return 1;
         else return 0;
     })
     feed.forEach(repo => {
+        feedEl.innerHTML = "";
         let repoHTML = createRepoHTML(repo);
-        followingEl.appendChild(repoHTML);
+        feedEl.appendChild(repoHTML);
     });
 }
 
