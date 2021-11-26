@@ -87,6 +87,9 @@ function removeRepo(repo) {
     storage = storage.filter(r => {
         return r.fullName != repo.fullName
     });
+    feed = feed.filter(r => {
+        return r.fullName != repo.fullName
+    });
 }
 
 /* Feed and Repo Display */
@@ -221,7 +224,7 @@ function createRepoHTML(repo) {
 function createFeedHTML(repo) {
     let container = document.createElement("div");
     container.setAttribute("class", "panel-child");
-    
+
     let displayTitle = document.createElement("h3");
     displayTitle.textContent = `${repo.name} (${repo.owner})`;
     container.append(displayTitle);
@@ -363,17 +366,6 @@ function unfollowRepo(event) {
     // TODO: Need to remove the repo from storage
 }
 
-
-/* Modal Event Listeners */
-// Listen for open click
-modalBtn.addEventListener('click', openModal);
-// Listen for close click
-closeBtn.addEventListener('click', closeModal);
-// Listen for outside click
-window.addEventListener('click', outsideClick);
-// Listen for submit click
-modalForm.addEventListener('submit', getUserInput);
-
 /* API Requests */
 function getRepo(owner, repo) {
     let url = `https://api.github.com/repos/${owner}/${repo}`
@@ -403,3 +395,14 @@ function getRepo(owner, repo) {
             return _;
         });
 }
+
+/* Modal Event Listeners */
+// Listen for open click
+modalBtn.addEventListener('click', openModal);
+// Listen for close click
+closeBtn.addEventListener('click', closeModal);
+// Listen for outside click
+window.addEventListener('click', outsideClick);
+// Listen for submit click
+modalForm.addEventListener('submit', getUserInput);
+
