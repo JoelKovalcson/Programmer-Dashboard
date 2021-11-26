@@ -77,9 +77,11 @@ function addRepo(repo) {
     if (found == undefined) {
         storage.push(repo);
         saveStorage();
+        return true;
     } else {
         // The user entered a duplicate repository!
         // TODO: Handle this
+        return false;
     }
 }
 
@@ -182,8 +184,8 @@ function refreshRepoDisplay() {
         else if (first.name > second.name) return 1;
         else return 0;
     });
+    followingEl.innerHTML = "";
     storage.forEach(repo => {
-        followingEl.innerHTML = "";
         let repoHTML = createRepoHTML(repo);
         followingEl.appendChild(repoHTML);
     });
@@ -216,7 +218,8 @@ function createRepoHTML(repo) {
     unfollowBtn.textContent = "Unfollow";
     unfollowBtn.setAttribute("class", "exitButton");
     // Add event listener to unfollow the repo when it's clicked
-    unfollowBtn.addEventListener('click', unfollowRepo);
+    // unfollowBtn.addEventListener('click', unfollowRepo);
+    $(container).on("click", ".exitButton", unfollowRepo);
 
     container.append(displayTitle, watchers, progLang, forkCount, openIssueCount, subCount, updateTime, createdTime, unfollowBtn, visitRepo);
     return container;
@@ -349,8 +352,7 @@ function getUserInput(event) {
         .then((repo) => {
             if (repo) {
                 foundRepo = repo;
-                addRepo(repo);
-                followingEl.appendChild(createRepoHTML(repo));
+                if(addRepo(repo)) followingEl.appendChild(createRepoHTML(repo));
             }
         });
     // TODO: Need to update display after this, but just to add a single repo to list
@@ -365,7 +367,23 @@ function getUserInput(event) {
 
 function unfollowRepo(event) {
     // TODO: Need to remove the repo from storage
+
+    let removeThis = $(event.target).parent();
+    
+    let repoName = removeThis.children("h3").text();
+    // Repo-Name (Owner) -> Owner/Repo-Name
+    repoName = repoName.split(' ');
+    repoName = `${repoName[1].substring(1, repoName[1].length-1)}/${repoName[0]}`;
+
+    let repo = {
+        fullName: repoName
+    };
+    removeRepo(repo);
+    saveStorage();
+    updateDisplay();
 }
+
+
 
 /* API Requests */
 function getRepo(owner, repo) {
