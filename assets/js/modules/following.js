@@ -411,7 +411,7 @@ function getRepo(owner, repo) {
             // There was an error getting the URL response.
             console.log("Error fetching repository from user-provided input.");
             console.log(ex);
-            return _;
+            return;
         });
 }
 
