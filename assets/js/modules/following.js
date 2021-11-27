@@ -208,6 +208,7 @@ function createRepoHTML(repo) {
     displayTitle.textContent = `${repo.name} (${repo.owner})`;
     visitRepo.textContent = "Visit this Repo";
     visitRepo.setAttribute("href", repo.link);
+    visitRepo.setAttribute("target", "_blank");
     updateTime.textContent = `Time Updated: ${repo.updateTime}`;
     watchers.textContent = `Number of Watchers: ${repo.watchers}`;
     progLang.textContent = `Programming Language: ${repo.programLang}`;
@@ -275,7 +276,8 @@ function createFeedHTML(repo) {
     let visitRepo = document.createElement("a");
     visitRepo.textContent = "Visit this Repo";
     visitRepo.setAttribute("href", repo.link);
-
+    visitRepo.setAttribute("target", "_blank");
+    
     container.append(visitRepo);
     return container;
 }
