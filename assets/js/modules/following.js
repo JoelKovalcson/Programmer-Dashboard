@@ -216,7 +216,7 @@ function createRepoHTML(repo) {
     subCount.textContent = `Subscriber Count: ${repo.subs}`;
     createdTime.textContent = `Date Created: ${repo.bornDate}`;
     unfollowBtn.textContent = "Unfollow";
-    unfollowBtn.setAttribute("class", "exitButton");
+    unfollowBtn.setAttribute("id", "exitButton");
     // Add event listener to unfollow the repo when it's clicked
     // unfollowBtn.addEventListener('click', unfollowRepo);
     $(container).on("click", ".exitButton", unfollowRepo);

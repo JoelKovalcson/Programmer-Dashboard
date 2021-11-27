@@ -7,21 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/styles.css" />
-    <title>GitHub At-A-Glance</title>
+    <title>Programmer Dashboard</title>
 </head>
 
-<body class="">
+<body>
+    
+    
     <!-- Navigation/Header -->
-    <header class="h-16 m-2">
-        <h1 class="title text-5xl text-center">
-            GitHub At-A-Glance
-        </h1>
-        <ul class="menu text-center text-xl flex flex-wrap">
+    <nav class="sticky top-0 w-100 h-10">
+        <ul class="absolute left-2 top-0 text-center text-xl flex flex-wrap">
             <li>
-                <button id="clearData" class="menu-button">Clear Data</button>
+                <button id="clearData" class="bg-yellow-600 text-lg text-black">Clear Data</button>
                 <button id="refreshAll" class="panel-button">Refresh All</button>
             </li>
         </ul>
+    </nav>
+    <header class="bg-gradient-to-b from-yellow-600 sticky flex-col mt-2 mr-2 ml-2 mb-5 pt-8 pb-3">
+        <h1 class="p-5 title text-3xl sm:text-7xl  text-center text-white col">
+            Programmer Dashboard
+        </h1>
     </header>
 
 
@@ -102,12 +106,14 @@
     <!-- Main Body -->
     <div class="flex flex-col md:flex-row justify-around m-3">
         <!-- Left Panel (Feed) -->
-        <section class="flex-1 panel m-1">
-            <h2 class="text-center text-3xl font-bold">
-                Feed
-            </h2>
-            <button id="refreshFeed" class="panel-button">Refresh</button>
-            <div id="feed"></div>
+        <section class="flex-1 panel m-1 ">
+            <a href="./#feed-sect"> 
+                <h2 class="text-center text-xl sm:text-3xl sticky top-10 font-bold">Feed</h2>
+            </a>
+            <div id="feed-sect" class="sticky top-12 w-1/8">
+                <button id="refreshFeed" class="panel-button">Refresh</button>
+            </div>
+            <div id="feed" class="mb-8"></div>
             <!-- Sample Child 
             <div class="feed-child">
                 <h3>Title</h3>
@@ -119,14 +125,16 @@
         </section>
 
         <!-- Right Panel (Following/Popular)-->
-        <div class="flex-1 flex flex-col">
+        <div  class="flex-1 flex flex-col">
             <!-- Top Panel (Following) -->
-            <section class="panel m-1">
-                <h2 class="text-center text-3xl font-bold">
-                    Following
-                </h2>
-                <button id="refreshFollowing" class="panel-button">Refresh</button>
-                <button id="addFollow" class="panel-button">Add</button>
+            <section  class="panel m-1 pb-12">
+                <a href="./#following-sect">
+                    <h2 class="text-center text-xl sticky top-10 mb-1 font-bold sm:text-3xl">Following</h2>
+                </a>
+                <div id="following-sect" class="flex sticky top-12 w-1/8">
+                    <button id="refreshFollowing" class="panel-button">Refresh</button>
+                    <button id="addFollow" class="panel-button">Add</button>
+                </div>
                 <div id="following"></div>
                 <!-- Sample Child 
                 <div class="following-child">
@@ -138,13 +146,15 @@
                 -->
             </section>
             <!-- Bottom Panel (Popular) -->
-            <section class="panel m-1">
-                <h2 class="text-center text-3xl font-bold">
-                    News
-                </h2>
+            <section  class="panel m-1">
+                <a href="./#news-sect">
+                    <h2 class="text-center text-xl sticky top-10 font-bold sm:text-3xl">News</h2>
+                </a>
                 <!-- <button id="refreshPopular" class="panel-button">Refresh</button> -->
-                <button id="changeNews" class="panel-button">Story Type</button>
-                <div id="news"></div>
+                <div id="news-sect" class="flex sticky top-12 w-1/8">
+                    <button id="changeNews" class="panel-button mb-8">Story Type</button>
+                </div>
+                <div id="news" class=></div>
                 <!-- Sample Child 
                 <div class="popular-child">
                     <h3>Repository Name</h3>
