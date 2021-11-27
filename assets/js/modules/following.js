@@ -207,7 +207,7 @@ function createRepoHTML(repo) {
     container.setAttribute("class", "panel-child");
     displayTitle.textContent = `${repo.name} (${repo.owner})`;
     visitRepo.textContent = "Visit this Repo";
-    visitRepo.setAttribute("href", repo.svn_url);
+    visitRepo.setAttribute("href", repo.link);
     updateTime.textContent = `Time Updated: ${repo.updateTime}`;
     watchers.textContent = `Number of Watchers: ${repo.watchers}`;
     progLang.textContent = `Programming Language: ${repo.programLang}`;
@@ -274,7 +274,7 @@ function createFeedHTML(repo) {
     // Always included
     let visitRepo = document.createElement("a");
     visitRepo.textContent = "Visit this Repo";
-    visitRepo.setAttribute("href", repo.svn_url);
+    visitRepo.setAttribute("href", repo.link);
 
     container.append(visitRepo);
     return container;
