@@ -1,6 +1,8 @@
 // Reference to DOM elements
 var followingEl = document.getElementById("following");
 var feedEl = document.getElementById("feed");
+var refreshBtn = document.getElementById("refreshAll");
+var clearDataBtn = document.getElementById("clearData");
 
 // localStorage key for page information
 const storageString = "repoData";
@@ -68,6 +70,16 @@ function loadStorage() {
 
 function saveStorage() {
     if (storage != null) localStorage.setItem(storageString, JSON.stringify(storage));
+}
+
+function clearData() {
+    storage = prevStorage = feed = [];
+    setPrevStorage();
+    updateRepoData().then(() => {
+        saveStorage();
+        updateFeedData();
+        updateDisplay();
+    });
 }
 
 function addRepo(repo) {
@@ -426,3 +438,6 @@ closeBtn.addEventListener('click', closeModal);
 window.addEventListener('click', outsideClick);
 // Listen for submit click
 modalForm.addEventListener('submit', getUserInput);
+
+/* Menu Buttons */
+clearDataBtn.addEventListener('click', clearData);
