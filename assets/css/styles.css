@@ -53,15 +53,15 @@ button {
     background-color: rgb(98, 211, 98);
 }
 
-.button {
+/* .button {
     background-color: #f56e0b;
     color: #D0D0D0;
 }
-
+ Both of these can be taken out.
 
 .button:hover {
     background-color: #aa4d0b;
-}
+} */
 
 .closeBtn {
     color: #ccc;
