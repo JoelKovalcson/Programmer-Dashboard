@@ -99,15 +99,20 @@ button {
     background-color: rgba(0,0,0,0.5);
 }
 
-.modal input {
-    color: var(--page-background);
+.modal input[type="radio"]:checked + label {
+    opacity: 100%;
+}
+
+.modal input, label {
+    opacity: 40%;
 }
 
 .modalContent {
     background-color: var(--secondary-background);
     margin: 20% auto;
     padding: 10px;
-    width: 50%;
+    max-width: 300px;
+    min-width: 300px;
     border-radius:10px;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
     animation-name: modalopen;
