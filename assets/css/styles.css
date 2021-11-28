@@ -103,8 +103,12 @@ button {
     opacity: 100%;
 }
 
-.modal input, label {
+.modal label {
     opacity: 40%;
+}
+
+.number {
+    opacity: 100%;
 }
 
 .modalContent {
