@@ -23,43 +23,43 @@
 
     <!---- Modals ---->
     <!-- Follow Add Modal -->
-    <div id="simpleModal" class="modal">
-        <div class="modalContent">
+    <section id="simpleModal" class="modal">
+        <div class="modalContent max-w-xs">
                 <button id="closeBtn" class="closeBtn">&times;</button>
                 <h3 class="text-4xl text-center border-b-2 p-2 mb-2">Follow a User or Repository</h3>
             <div class="modalBody">
                 <form id="searchForm" class="searchForm">
                     <span class="radio-wrapper text-center">
                         <div class="m-2 text-md">
-                            <input type="radio" name="select" id="radioName">
+                            <input type="radio" name="select" id="radioName" class="float-left" checked>
                             <label for="searchUser">Provide a Username:</label>
                             <input type="text" id="searchUser" name="searchUser">
                         </div>
-                        <div class="m-2">    
+                        <div class="m-2 border-b-2 p-4">    
                             <label for="searchRepo">Provide a repository name:</label>
                             <input type="text" id="searchRepo" name="searchRepo">
                         </div>
                         <div class="m-2">    
-                            <input type="radio" name="select" id="radioLink">    
+                            <input type="radio" name="select" id="radioLink" class="float-left">    
                             <label for="submitRepo">Provide a repository link:</label>
                             <input type="text" id="submitRepo" name="submitRepo">
                         </div>
                     </span>        
-                    <button type="submit" id="btnSubmit" class="text-lg text-left">Submit</button>
+                    <button type="submit" id="btnSubmit" class="text-lg text-left w-20">Submit</button>
                 </form>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div id="newsModal" class="modal">
-        <div class="modalContent">
+    <section id="newsModal" class="modal">
+        <div class="modalContent max-w-sm">
                 <button id="closeNewsModal" class="closeBtn">&times;</button>
                 <h3 class="text-4xl text-center border-b-2 p-2 mb-2">Select your stories</h3>
             <div class="modalBody">
                 <form id="storyType" class="searchForm">
                     <span class="radio-wrapper text-center grid grid-rows-3 grid-cols-2 text-md">
                         <div>
-                            <input type="radio" name="story" id="topstories" class="story"> 
+                            <input type="radio" name="story" id="topstories" class="story" checked> 
                             <label for="topstories">Top Stories</label>
                         </div>
                         <div>
@@ -93,11 +93,11 @@
                             <option value="25" selected>25</option>
                         </select>
                     </div>
-                    <button type="submit" id="searchFilter" class="text-lg">Submit</button>    
+                    <button type="submit" id="searchFilter" class="text-lg w-20">Submit</button>    
                 </form>
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- Main Body -->
     <main>
