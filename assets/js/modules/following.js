@@ -220,7 +220,7 @@ function createRepoHTML(repo) {
     unfollowBtn.setAttribute("id", "exitButton");
     // Add event listener to unfollow the repo when it's clicked
     // unfollowBtn.addEventListener('click', unfollowRepo);
-    $(container).on("click", ".exitButton", unfollowRepo);
+    $(container).on("click", "#exitButton", unfollowRepo);
 
     container.append(displayTitle, watchers, progLang, forkCount, openIssueCount, subCount, updateTime, createdTime, unfollowBtn, visitRepo);
     return container;
