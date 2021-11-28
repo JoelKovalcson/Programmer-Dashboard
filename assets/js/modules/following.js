@@ -82,6 +82,15 @@ function clearData() {
     });
 }
 
+function refreshDisplay() {
+    setPrevStorage();
+    updateRepoData().then(() => {
+        saveStorage();
+        updateFeedData();
+        updateDisplay();
+    });
+}
+
 function addRepo(repo) {
     let found = storage.find(r => {
         return r.fullName == repo.fullName
@@ -289,7 +298,7 @@ function createFeedHTML(repo) {
     visitRepo.textContent = "Visit this Repo";
     visitRepo.setAttribute("href", repo.link);
     visitRepo.setAttribute("target", "_blank");
-    
+
     container.append(visitRepo);
     return container;
 }
@@ -441,3 +450,4 @@ modalForm.addEventListener('submit', getUserInput);
 
 /* Menu Buttons */
 clearDataBtn.addEventListener('click', clearData);
+refreshBtn.addEventListener('click', refreshDisplay);
