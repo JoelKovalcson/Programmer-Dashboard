@@ -15,6 +15,10 @@ body {
     color: var(--default-text-color);
 }
 
+nav {
+    background-color: var(--secondary-background);
+}
+
 /* Buttons and Links*/
 button,
 a {
@@ -31,19 +35,33 @@ button {
     border-radius: 10px;
     padding: 0 3px;
 }
+ #refreshAll {
+     border: 1px solid var(--default-text-color);
+     color: var(--default-text-color);
+ }
 
-.button {
+#clearData:hover {
+    background-color: red;
+    color: white;
+    border: 1px solid white;
+}
+#refreshFeed:hover,
+#refreshFollowing:hover,
+#refreshAll:hover {
+    border: 2px solid white ;
+    font-weight: bolder;
+    background-color: rgb(98, 211, 98);
+}
+
+/* .button {
     background-color: #f56e0b;
     color: #D0D0D0;
 }
-
-.exitButton {
-    /* Adding styling as needed */
-}
+ Both of these can be taken out.
 
 .button:hover {
     background-color: #aa4d0b;
-}
+} */
 
 .closeBtn {
     color: #ccc;
@@ -55,6 +73,15 @@ button {
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+
+#exitButton {
+    background-color: #aa4d0b;
+    color: white;
+}
+
+#exitButton:hover {
+    border: 2px solid white;
 }
 
 /**modal**/
@@ -109,27 +136,35 @@ header {
     position: relative;
 }
 
-.title {
-    color: var(--accent-text-color);
-}
 
-.menu {
+/* .menu {
     position: absolute;
     top: 0px;
     left: 0px;
-}
+} */
 
 
 /** Panels **/
 
 .panel h2 {
-    border: solid 3px var(--accent-border-color);
+    border: solid 3px var(--page-background);
+    color: black;
+    background-color: var(--accent-border-color);/* ....or rgb(231, 154, 54);*/
     border-radius: 10px;
     padding: 4px 0px;
 }
 
 .panel button {
     margin: 3px;
+    background-color: var(--page-background);
+    border: solid 1px var(--default-text-color) ;
+    color: var(--default-text-color);
+}
+
+.panel button:hover {
+    border: solid 2px var(--default-text-color);
+    background-color: var(--secondary-background);
+    font-weight: bolder;
 }
 
 /* Panel Children */
@@ -151,4 +186,5 @@ header {
     padding-left: 15px;
     font-size: larger;
     border-bottom: thin solid var(--default-text-color);
+    background-color: var(--secondary-background);
 }
