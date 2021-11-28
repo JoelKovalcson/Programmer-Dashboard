@@ -17,6 +17,7 @@ body {
 
 nav {
     background-color: var(--secondary-background);
+    z-index: 9999;
 }
 
 /* Buttons and Links*/
@@ -99,13 +100,7 @@ button {
     background-color: rgba(0,0,0,0.5);
 }
 
-.modal input[type="radio"]:checked + label {
-    opacity: 100%;
-}
 
-.modal label {
-    opacity: 40%;
-}
 
 .number {
     opacity: 100%;
